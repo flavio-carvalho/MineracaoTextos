@@ -1,0 +1,22 @@
+wd<- paste((getwd()),"/R",sep="")
+setwd(wd)
+unzip("curto.zip",exdir = "./curto",junkpaths = TRUE)
+wd<- paste((getwd()),"/curto",sep="")
+setwd(wd)
+
+ doclist<- list.files(path = ".", pattern = ".txt", all.files = FALSE, full.names = FALSE, recursive = FALSE, ignore.case = FALSE, include.dirs = FALSE, no.. = FALSE)
+
+obtem_vetor <- function(f,lower=FALSE,min_len=2) {
+  vetor <- scan(f, sep="", what=character())
+  if(lower) {
+    vetor <- tolower(vetor)
+  }
+  return(vetor[nchar(vetor)>=min_len])
+}
+
+for (i in 1:(length(doclist))){
+	arquivo <- doclist[i]
+	termos <- obtem_vetor(arquivo)
+	teste<-(table(termos))
+
+}
