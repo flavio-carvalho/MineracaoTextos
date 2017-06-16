@@ -1,3 +1,6 @@
+library("stringi", lib.loc="~/R/win-library/3.4")
+library("stringr", lib.loc="~/R/win-library/3.4")
+
 wd<- paste((getwd()),"/R",sep="")
 setwd(wd)
 unzip("curto.zip",exdir = "./curto",junkpaths = TRUE)
