@@ -1,0 +1,99 @@
+##Fragmentos do que estava testando no R para montar a tabela de termos x frequencia:
+## (não é um código em sequência!)
+
+wd<- paste((getwd()),"/R",sep="")
+setwd(wd)
+unzip("curto.zip",exdir = "./curto",junkpaths = TRUE)
+wd<- paste((getwd()),"/curto",sep="")
+setwd(wd)
+
+x<- paste((getwd()),"/R/curto",sep="")
+setwd(x)
+getwd()
+
+ doclist<- list.files(path = ".", pattern = ".txt", all.files = FALSE, full.names = FALSE, recursive = FALSE, ignore.case = FALSE, include.dirs = FALSE, no.. = FALSE)
+
+
+arquivotemp <- "cv001_18431.txt"
+obtem_vetor <- function(f,lower=FALSE,min_len=2) {
+  vetor <- scan(f, sep="", what=character())
+  if(lower) {
+    vetor <- tolower(vetor)
+  }
+  return(vetor[nchar(vetor)>=min_len])
+}
+termos <- obtem_vetor(arquivotemp)
+
+teste<-cbind(table(termos))
+
+
+
+
+
+
+
+
+
+
+
+
+setwd("C:/Users/Flavio/Documents/R")
+unzip("curto.zip",exdir = "./curto",junkpaths = TRUE)
+
+
+arquivotemp <- doclist[1]
+%%arquivotemp <- "cv001_18431.txt"
+obtem_vetor <- function(f,lower=FALSE,min_len=2) {
+  vetor <- scan(f, sep="", what=character())
+
+  if(lower) {
+    vetor <- tolower(vetor)
+  }
+  if((nchar(vetor)<min_len)&(grepl("I", vetor))){
+  return(vetor[nchar(vetor)<min_len])
+} else {
+  return(vetor[nchar(vetor)>=min_len])
+}
+}
+termos <- obtem_vetor(arquivotemp)
+write.table(table(termos), quote = FALSE, sep = ",",row.names = FALSE)
+
+
+
+teste<-cbind(teste,table(termos))
+
+teste<-cbind(table(termos))
+wd<- paste((getwd()),"/R",sep="")
+setwd(wd)
+unzip("curto.zip",exdir = "./curto",junkpaths = TRUE)
+wd<- paste((getwd()),"/curto",sep="")
+setwd(wd)
+
+
+ doclist<- list.files(path = ".", pattern = ".txt", all.files = FALSE, full.names = FALSE, recursive = FALSE, ignore.case = FALSE, include.dirs = FALSE, no.. = FALSE)
+
+arquivotemp <- doclist[1]
+%%arquivotemp <- "cv001_18431.txt"
+obtem_vetor <- function(f,lower=FALSE,min_len=2) {
+  vetor <- scan(f, sep="", what=character())
+  if((nchar(vetor)<min_len)&(vetor="I"){
+  return(vetor[nchar(vetor)<min_len])
+}
+  if(lower) {
+    vetor <- tolower(vetor)
+  }
+  return(vetor[nchar(vetor)>=min_len])
+}
+termos <- obtem_vetor(arquivotemp)
+write.table(table(termos), quote = FALSE, sep = ",",row.names = FALSE)
+
+
+
+setwd("C:/Users/Flavio/Documents/R")
+unzip("curto.zip",exdir = "./curto",junkpaths = TRUE)
+
+x<- paste((getwd()),"/curto",sep="")
+setwd(x)
+getwd()
+
+
