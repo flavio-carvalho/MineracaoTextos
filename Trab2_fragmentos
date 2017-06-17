@@ -24,6 +24,24 @@ for (i in 1:(length(doclist))){
 
 }
 
+> xyz<-unlist(strsplit(termos, "\\W+"))
+> xyz<-unlist(strsplit(termos, "\\W+"))
+> palavras <- paste(1,names(table(xyz)), table(xyz), sep=",")
+> vetor <- paste(palavras, sep="\n", "\n") 
+> write.csv(cat(vetor, file ="teste.csv",append=TRUE))
+""
+> xyz<-unlist(strsplit(termos2, "\\W+"))
+> palavras <- paste(2,names(table(xyz)), table(xyz), sep=",")
+> vetor <- paste(palavras, sep="\n", "\n") 
+> write.csv(cat(vetor, file ="teste.csv",append=TRUE))
+""
+> temp = read.csv("teste.csv", sep=",") 
+> temp
+> temp = read.csv("teste.csv", sep=",") 
+> temp
+
+> colnames(temp)=c("doc","termo","freq")
+
 Problemas: 
 - Strings tipo "I" ou "a" não são contadas;
 - Considera todos os caracteres entre o primeiro ' e o próximo ' como um termo
