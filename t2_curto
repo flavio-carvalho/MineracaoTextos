@@ -32,4 +32,4 @@ termosdocumentos = read.csv("curto.csv",stringAsFactors = F)
 colnames(termosdocumentos)=c("doc","termo","freq")
 
 (s<-summary (as.factor(termosdocumentos$termo)),maxsum=999999)
-tf_idf <- as.data.frame(cbind(Termos = names(s),dft = s, idft=((length(doclist))/s)), stringsAsFactors=F, row.names = 1:length(s))
+termo_df_idf <- as.data.frame(cbind(Termos = names(s),df = s, idf=((length(doclist))/s)), stringsAsFactors=F, row.names = 1:length(s))
