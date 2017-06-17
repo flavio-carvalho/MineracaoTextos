@@ -21,6 +21,13 @@ obtem_vetor <- function(f,lower=FALSE,min_len=2) {
 for (i in 1:(length(doclist))){
 	arquivo <- doclist[i]
 	termos <- obtem_vetor(arquivo)
-	teste<-(table(termos))
+	xyz<-unlist(strsplit(termos,"\\W+"))
+	palavras <- paste (i,names(table(xyz)),table(xyz),sep=",")
+	vetor <- paste (palavras,sep="\n","\n")
+	write.csv(cat(vetor,file="curto.csv",append=TRUE))
 
 }
+
+termosdocumentos = read.csv("curto.csv",stringAsFactors = F)
+colnames(termosdocumentos)=c("doc","termo","freq")
+
