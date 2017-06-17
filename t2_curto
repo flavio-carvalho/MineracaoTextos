@@ -31,5 +31,5 @@ for (i in 1:(length(doclist))){
 termosdocumentos = read.csv("curto.csv",stringAsFactors = F)
 colnames(termosdocumentos)=c("doc","termo","freq")
 
-(s<-summary (as.factor(termosdocumentos$termo)))
-as.data.frame(cbind(Termos = names(s),dft = s, idft=((length(doclist))/s)), stringsAsFactors=F, row.names = 1:length(s))
+(s<-summary (as.factor(termosdocumentos$termo)),maxsum=999999)
+tf_idf <- as.data.frame(cbind(Termos = names(s),dft = s, idft=((length(doclist))/s)), stringsAsFactors=F, row.names = 1:length(s))
