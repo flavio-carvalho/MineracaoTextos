@@ -1,6 +1,7 @@
-library("stringi", lib.loc="~/R/win-library/3.4")
-library("stringr", lib.loc="~/R/win-library/3.4")
+###library("stringi", lib.loc="~/R/win-library/3.4")
+###library("stringr", lib.loc="~/R/win-library/3.4")
 
+#Calculo de TF (Sem penalizar)
 wd<- paste((getwd()),"/R",sep="")
 setwd(wd)
 unzip("curto.zip",exdir = "./curto",junkpaths = TRUE)
@@ -31,5 +32,10 @@ for (i in 1:(length(doclist))){
 termosdocumentos = read.csv("curto.csv",stringAsFactors = F)
 colnames(termosdocumentos)=c("doc","termo","freq")
 
+#Gera a matriz de document frequency (DF) conforme a fórmula com log
 (s<-summary (as.factor(termosdocumentos$termo)),maxsum=999999)
 termo_df_idf <- as.data.frame(cbind(Termos = names(s),df = s, idf=log10((length(doclist))/s)), stringsAsFactors=F, row.names = 1:length(s))
+
+#Calcula o terceiro item: Matriz de Term Frequency (TF)
+logdf <- as.data.frame(cbind(termosdocumento$doc,termosdocumento$termo,(1+log10(termosdocumento$freq)))
+colnames(logdf)<- c("Doc_number", "Termo", "TF)
