@@ -1,6 +1,40 @@
 ##Fragmentos do que estava testando no R para montar a tabela de termos x frequencia:
 ## (não é um código em sequência!)
 
+#Inicialização do dataframe para receber os termos x freq ###(*Obs1)
+dataframe_doc_TF <- data.frame( Termos=character(),
+				Doc1=double(),
+				Doc2=double(),
+				Doc3=double(),
+				Doc4=double(),
+				Doc5=double(),
+				Doc6=double(),
+				Doc7=double(),
+				Doc8=double(),
+				Doc9=double(),
+				Doc10=double())
+
+#inserir em algum loop ("1" vai ser o contador "i" do loop) 
+colnames(y)<-c("Termos",paste("Doc","1",sep=""))
+#tenho a tabela termos x freq estruturada ###(*Obs2)
+palavras2 <- as.data.frame((cbind(names(table(termos)),table(termos))), row.names = FALSE)
+
+#tenho a estrutura criada ### de (*Obs1) e (*Obs2) ###(*obs3)
+x<-dataframe_doc_TF
+y<-palavras2
+
+#Quero só unir (somar? Join? Merge?) as tabelas/dataframes, de (*obs3), inserindo novas linhas para novos termos
+lixo<-merge(x,y,all.y = TRUE )
+
+#para fazer item 6 do trabalho, quero conseguir fazer algo como (do sql):
+#update tabela 1 t1, tabela2 t2 set t2.freq=t2.freq*t1.idf where t1.nrDOc=t2.nrDoc
+#ou sera mais, na verdade:
+#update tabela 1 t1, tabela2 t2 set t2.freq=t2.freq*t1.idf where t1.Termo=t2.Termo ???
+
+
+
+
+
 wd<- paste((getwd()),"/R",sep="")
 setwd(wd)
 unzip("curto.zip",exdir = "./curto",junkpaths = TRUE)
