@@ -26,12 +26,23 @@ y<-palavras2
 #Quero só unir (somar? Join? Merge?) as tabelas/dataframes, de (*obs3), inserindo novas linhas para novos termos
 lixo<-merge(x,y,all.y = TRUE )
 
+#problema, merge assim está só substituindo... buscando/testando outras formas...
+
 #para fazer item 6 do trabalho, quero conseguir fazer algo como (do sql):
 #update tabela 1 t1, tabela2 t2 set t2.freq=t2.freq*t1.idf where t1.nrDOc=t2.nrDoc
 #ou sera mais, na verdade:
 #update tabela 1 t1, tabela2 t2 set t2.freq=t2.freq*t1.idf where t1.Termo=t2.Termo ???
 
 
+
+############## A avaliar #################################
+### If you want to create an empty data.frame with dynamic names (colnames in a variable), this can help:
+###
+###names <- c("v","u","w")
+###df <- data.frame()
+###for (k in names) df[[k]]<-as.numeric()
+###
+###You can change the type as well if you need so.
 
 
 
