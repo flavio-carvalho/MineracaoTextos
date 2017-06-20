@@ -26,7 +26,7 @@ for (i in 1:(length(doclist))){
   termos <- obtem_vetor(arquivo)
   xyz<-unlist(strsplit(termos, "\\W+"))
   palavras <- paste(i,names(table(xyz)), table(xyz), sep=",")
-  palavras2 <- as.data.frame((cbind(names(table(termos)),table(termos))), row.names = FALSE)
+  palavras2 <- as.data.frame((cbind(names(table(xyz)),table(xyz))), row.names = FALSE)
   vetor <- paste(palavras, sep="\n", "\n") 
   write.csv(cat(vetor, file ="curto.csv",append=TRUE))
 #parte que monta a tabela documentos x TF
