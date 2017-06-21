@@ -1,18 +1,79 @@
 ##Fragmentos do que estava testando no R para montar a tabela de termos x frequencia:
 ## (não é um código em sequência!)
 
-#Inicialização do dataframe para receber os termos x freq ###(*Obs1)
-dataframe_doc_TF <- data.frame( Termos=character(),
-				Doc1=double(),
-				Doc2=double(),
-				Doc3=double(),
-				Doc4=double(),
-				Doc5=double(),
-				Doc6=double(),
-				Doc7=double(),
-				Doc8=double(),
-				Doc9=double(),
-				Doc10=double())
+######Para gerar tf x idf... Fora do loop, um a um, funciona como:
+
+i6 <- termo_df_idf$Termos
+i6<-as.data.frame(i6)
+colnames(i6)<-c("Termos")
+
+
+   i6.Doc1<-(as.numeric(as.character(x$Doc1,row.names = NULL)))*(as.numeric(as.character(termo_df_idf$idf,row.names = NULL)))
+   i6.Doc1<-as.data.frame(i6.Doc1)
+   colnames(i6.Doc1)<-c("Doc1")
+   i6<-cbind(i6,i6.Doc1, row.names=NULL)
+
+
+###Tentando montar o loop
+i6 <- termo_df_idf$Termos
+i6<-as.data.frame(i6)
+colnames(i6)<-c("Termos")
+for (i in 1:(length(doclist))){
+   coluna<-paste("i6.Doc",i,sep="")
+   valor<-paste( "(as.numeric(as.character(x$Doc",i,", row.names = NULL)))*(as.numeric(as.character(termo_df_idf$idf,row.names = NULL))))" ,sep="")
+   coluna<-valor
+   valor2<-paste("as.data.frame(i6.Doc",i,")",sep="")
+   coluna<-valor2
+   t1 <- paste( "colnames(",coluna,")", sep="" )
+   t2 <- paste( "Doc",i,sep="")
+   t1<-t2
+   t3<-"i6"
+
+   valor3<-paste( "cbind(i6,i6.Doc", i, ", row.names=NULL)", sep="" )
+   t3<-valor3
+
+}
+####################################################
+i6 <- termo_df_idf$Termos
+i6<-as.data.frame(i6)
+colnames(i6)<-c("Termos")
+for (i in 1:(length(doclist))){
+   coluna<-paste("i6.Doc",i,sep="")
+   valor<-paste( "(as.numeric(as.character(x$Doc",i,", row.names = NULL)))*(as.numeric(as.character(termo_df_idf$idf,row.names = NULL))))" ,sep="")
+
+   assign(coluna,valor)
+   valor2<-paste("as.data.frame(i6.Doc",i,")",sep="")
+   assign(coluna,valor2)
+   t1 <- paste( "colnames(",coluna,")", sep="" )
+   t2 <- paste( "Doc",i,sep="")
+   assign(t1,t2)
+   t3<-"i6"
+
+   valor3<-paste( "cbind(i6,i6.Doc", i, ", row.names=NULL)", sep="" )
+   assign(t3,valor3)
+
+}
+
+
+
+i6 <- termo_df_idf$Termos
+i6<-as.data.frame(i6)
+colnames(i6)<-c("Termos")
+for (i in 1:(length(doclist))){
+   coluna<-paste("i6.Doc",i,sep="")
+   valor<-paste( "(as.numeric(as.character(x$Doc",i,", row.names = NULL)))*(as.numeric(as.character(termo_df_idf$idf,row.names = NULL))))" ,sep="")
+   coluna<-valor
+   valor2<-paste("as.data.frame(i6.Doc",i,")",sep="")
+   coluna<-valor2
+   t1 <- paste( "colnames(",coluna,")", sep="" )
+   t2 <- paste( "Doc",i,sep="")
+   t1<-t2
+   t3<-"i6"
+
+   valor3<-paste( "cbind(i6,i6.Doc", i, ", row.names=NULL)", sep="" )
+   t3<-valor3
+
+}
 
 #inserir em algum loop ("1" vai ser o contador "i" do loop) 
 colnames(y)<-c("Termos",paste("Doc","1",sep=""))
