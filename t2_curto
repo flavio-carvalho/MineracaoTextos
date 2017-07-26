@@ -5,18 +5,18 @@
 # 0.1 - Descompacta e acessa pasta do arquivo
 wd<- paste((getwd()),"/R",sep="")
 setwd(wd)
-unzip("curto.zip",exdir = "./curto",junkpaths = TRUE)
+unzip("curto.zip",exdir = "./curto",junkpaths = FALSE)
 wd<- paste((getwd()),"/curto",sep="")
 setwd(wd)
 
 # 0.2 - Lista dos arquivos descompactados na pasta
- doclist<- list.files(path = ".", pattern = ".txt", all.files = FALSE, full.names = FALSE, recursive = FALSE, ignore.case = FALSE, include.dirs = FALSE, no.. = FALSE)
+doclist<- list.files(path = ".", pattern = ".txt", all.files = FALSE, full.names = FALSE, recursive = FALSE, ignore.case = FALSE, include.dirs = FALSE, no.. = FALSE)
 
 # 0.3 -Função para leitura do arquivo 
 # Obs: troca os caracteres maiúsculos por minúsculos, descarta termos com 1 caracter.
 obtem_vetor <- function(f,lower=FALSE,min_len=2) {
   vetor <- scan(f, sep="", what=character(),quote="")
-
+  
   if(lower) {
     vetor <- tolower(vetor)
   }
@@ -25,58 +25,65 @@ obtem_vetor <- function(f,lower=FALSE,min_len=2) {
 
 # 0.4 -Loop para Calculo de TF (Sem penalizar) e gera arquivo csv
 
+x <- data.frame( Termos=character())
 for (i in 1:(length(doclist))){
-	arquivo <- doclist[i]
-	termos <- obtem_vetor(arquivo)
-	xyz<-unlist(strsplit(termos,"\\W+"))
-	palavras <- paste (i,names(table(xyz)),table(xyz),sep=",")
-	vetor <- paste (palavras,sep="\n","\n")
-	write.csv(cat(vetor,file="curto.csv",append=TRUE))
+  arquivo <- doclist[i]
+  termos <- obtem_vetor(arquivo)
+  xyz<-unlist(strsplit(termos, "\\W+"))
+  palavras <- paste(i,names(table(xyz)), table(xyz), sep=",")
+  palavras2 <- as.data.frame((cbind(names(table(xyz)),table(xyz))), row.names = FALSE)
+  vetor <- paste(palavras, sep="\n", "\n") 
+  write.csv(cat(vetor, file ="curto.csv",append=TRUE))
+#parte que monta a tabela documentos x TF
+  y<-palavras2
+  colnames(y)<-c("Termos",paste("Doc",i,sep=""))
+  x<-merge(x,y, by=intersect(names(x),names(y)), all=T)
 
 }
+x<-x[with(x, order(as.character(x$Termos))),]
 
 # 0.5 - Leitura do arquivo csv com o resultado da matriz Term frequency (TF) (sem penalizar)
-#termosdocumentos = read.csv("curto.csv",stringAsFactors = F)
-termosdocumentos = read.csv("curto.csv")
+termosdocumentos = read.csv("curto.csv", stringsAsFactors = F)
 colnames(termosdocumentos)=c("doc","termo","freq")
 
 # 1.0 - Solicitado "código para produzir a matriz de document frequency (DF) conforme a fórmula com log"
-# Obs.: Acho que se deseja iDF x Termo, não?
-# Obs.2: Tem algo estranho nesse termosdocumentos
+# Obs.: Acho que se deseja, na verdade, iDF x Termo, não?
+s<-summary((as.factor(termosdocumentos$termo)),maxsum = 999999)
+termo_df_idf<- as.data.frame(cbind(Termos=names(s),df = s, idf = log10((length(doclist))/s)), stringAsFactors=F,row.names=1:length(s))
 
-s<-summary (as.factor(termosdocumentos$termo),maxsum=999999)
-termo_df_idf <- as.data.frame(cbind(Termos = names(s),df = s, idf=log10((length(doclist))/s)), stringsAsFactors=F, row.names = 1:length(s))
-item1 <- termo_df_idf
 
 # 2.0 Gera um arquivo pdf com o resultado da matriz DF x Termo
-# Obs.: Acho que se deseja iDF x Termo, não?
+# Obs.: Acho que se deseja, na verdade, iDF x Termo, não?
 
 # WIP
 
 # 3.0 - Código para produzir a matriz de Term frequency (TF) conforme a fórmula com log
 # Obs.: #Calcula o terceiro item solicitado no trabalho -> Matriz de Term Frequency (TF) (penalizando)
 
-logdf <- as.data.frame(cbind(termosdocumentos$doc,termosdocumentos$termo,(1+log10(termosdocumentos$freq))))
-colnames(logdf)<- c("Doc_number", "Termo", "TF")
-
+logdf<-as.data.frame(cbind(termosdocumentos$doc,termosdocumentos$termo,1+log10(termosdocumentos$freq)))
+colnames(logdf)=c("Doc_number","Termo","TF")
 
 # 4.0 insira no arquivo pdf com o resultado da matriz TF x Documento.
 # WIP
 
 # 5.0 Código para produzir a matriz de TF*IDF
-# WIP -> talvez algo como abaixo
-for (i in 1:(length(doclist))){
+item5 <- termo_df_idf$Termos
+item5 <-as.data.frame(item5)
+colnames(item5)<-c("Termos")
 
-	coluna<-paste("i6.Doc",i,sep="")
-	valor<-paste( "(as.numeric(as.character(x$Doc",i,", row.names = NULL)))*(as.numeric(as.character(termo_df_idf$idf,row.names = NULL)))" ,sep="")
-	assign(coluna,eval(parse(text=valor)))
-	valor2<-paste("as.data.frame(i6.Doc",i,")",sep="")
-	assign(coluna,eval(parse(text=valor2)))
-	t1 <- paste( "colnames(",coluna,")<-c('Doc",i,"')", sep="" )
-	eval(parse(text=t1))
-	t2<-paste( "cbind(i6,i6.Doc", i, ", row.names=NULL)", sep="" )
-	i6<-eval(parse(text=t2))
-	t3 <- paste( "rm(", coluna,")",sep="" )
-	eval(parse(text=t3))
+# WIP
+
+for (i in 1:(length(doclist))){
+   coluna<-paste("item5.Doc",i,sep="")
+   eval(parse(paste( "(as.numeric(as.character(x$Doc",i,", row.names = NULL)))*(as.numeric(as.character(termo_df_idf$idf,row.names = NULL))))" ,sep="")))
+   eval(parse(paste("item5.Doc",i,"<-as.data.frame(item5.Doc",i,")",sep="")))
+   eval(parse(paste("item5<-cbind(item5,item5.Doc",i,", row.names=NULL",sep="")))
+#   item5.Doc1<-(as.numeric(as.character(x$Doc1,row.names = NULL)))*(as.numeric(as.character(termo_df_idf$idf,row.names = NULL)))
+#  item5.Doc1<-as.data.frame(item5.Doc1)
+
+#   item5<-cbind(item5,item5.Doc1, row.names=NULL)
 }
+
+# 6.0 "insira no arquivo pdf com o resultado da	matriz TF*IDF."
+# WIP
 
