@@ -41,13 +41,14 @@ termosdocumentos = read.csv("curto.csv")
 colnames(termosdocumentos)=c("doc","termo","freq")
 
 # 1.0 - Solicitado "código para produzir a matriz de document frequency (DF) conforme a fórmula com log"
-# Obs.: Acho que ele quer iDF x Termo, não?
+# Obs.: Acho que se deseja iDF x Termo, não?
+# Obs.2: Tem algo estranho nesse termosdocumentos
 
 s<-summary (as.factor(termosdocumentos$termo),maxsum=999999)
 termo_df_idf <- as.data.frame(cbind(Termos = names(s),df = s, idf=log10((length(doclist))/s)), stringsAsFactors=F, row.names = 1:length(s))
 
 # 2.0 Gera um arquivo pdf com o resultado da matriz DF x Termo
-# Obs.: Acho que ele quer iDF x Termo, não?
+# Obs.: Acho que se deseja iDF x Termo, não?
 
 # WIP
 
@@ -62,5 +63,19 @@ colnames(logdf)<- c("Doc_number", "Termo", "TF")
 # WIP
 
 # 5.0 Código para produzir a matriz de TF*IDF
-# WIP
+# WIP -> talvez algo como abaixo
+for (i in 1:(length(doclist))){
+
+	coluna<-paste("i6.Doc",i,sep="")
+	valor<-paste( "(as.numeric(as.character(x$Doc",i,", row.names = NULL)))*(as.numeric(as.character(termo_df_idf$idf,row.names = NULL)))" ,sep="")
+	assign(coluna,eval(parse(text=valor)))
+	valor2<-paste("as.data.frame(i6.Doc",i,")",sep="")
+	assign(coluna,eval(parse(text=valor2)))
+	t1 <- paste( "colnames(",coluna,")<-c('Doc",i,"')", sep="" )
+	eval(parse(text=t1))
+	t2<-paste( "cbind(i6,i6.Doc", i, ", row.names=NULL)", sep="" )
+	i6<-eval(parse(text=t2))
+	t3 <- paste( "rm(", coluna,")",sep="" )
+	eval(parse(text=t3))
+}
 
