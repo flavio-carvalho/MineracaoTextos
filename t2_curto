@@ -43,7 +43,7 @@ colnames(termosdocumentos)=c("doc","termo","freq")
 # 1.0 - Solicitado "código para produzir a matriz de document frequency (DF) conforme a fórmula com log"
 # Obs.: Acho que ele quer iDF x Termo, não?
 
-(s<-summary (as.factor(termosdocumentos$termo)),maxsum=999999)
+s<-summary (as.factor(termosdocumentos$termo),maxsum=999999)
 termo_df_idf <- as.data.frame(cbind(Termos = names(s),df = s, idf=log10((length(doclist))/s)), stringsAsFactors=F, row.names = 1:length(s))
 
 # 2.0 Gera um arquivo pdf com o resultado da matriz DF x Termo
