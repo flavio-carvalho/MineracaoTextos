@@ -63,6 +63,7 @@ item1<-termo_df_idf
 
 logdf<-as.data.frame(cbind(termosdocumentos$doc,termosdocumentos$termo,1+log10(termosdocumentos$freq)))
 colnames(logdf)=c("Doc_number","Termo","TF")
+item3 <- logdf
 
 # 4.0 insira no arquivo pdf com o resultado da matriz TF x Documento.
 # WIP
