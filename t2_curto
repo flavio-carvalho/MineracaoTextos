@@ -36,7 +36,8 @@ for (i in 1:(length(doclist))){
 }
 
 # 0.5 - Leitura do arquivo csv com o resultado da matriz Term frequency (TF) (sem penalizar)
-termosdocumentos = read.csv("curto.csv",stringAsFactors = F)
+#termosdocumentos = read.csv("curto.csv",stringAsFactors = F)
+termosdocumentos = read.csv("curto.csv")
 colnames(termosdocumentos)=c("doc","termo","freq")
 
 # 1.0 - Solicitado "código para produzir a matriz de document frequency (DF) conforme a fórmula com log"
