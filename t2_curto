@@ -73,16 +73,19 @@ item5 <-as.data.frame(item5)
 colnames(item5)<-c("Termos")
 
 # WIP
-
 for (i in 1:(length(doclist))){
-   coluna<-paste("item5.Doc",i,sep="")
-   eval(parse(paste( "(as.numeric(as.character(x$Doc",i,", row.names = NULL)))*(as.numeric(as.character(termo_df_idf$idf,row.names = NULL))))" ,sep="")))
-   eval(parse(paste("item5.Doc",i,"<-as.data.frame(item5.Doc",i,")",sep="")))
-   eval(parse(paste("item5<-cbind(item5,item5.Doc",i,", row.names=NULL",sep="")))
-#   item5.Doc1<-(as.numeric(as.character(x$Doc1,row.names = NULL)))*(as.numeric(as.character(termo_df_idf$idf,row.names = NULL)))
-#  item5.Doc1<-as.data.frame(item5.Doc1)
 
-#   item5<-cbind(item5,item5.Doc1, row.names=NULL)
+coluna<-paste("item5.Doc",i,sep="")
+valor<-paste( "(as.numeric(as.character(x$Doc",i,", row.names = NULL)))*(as.numeric(as.character(termo_df_idf$idf,row.names = NULL)))" ,sep="")
+assign(coluna,eval(parse(text=valor)))
+valor2<-paste("as.data.frame(item5.Doc",i,")",sep="")
+assign(coluna,eval(parse(text=valor2)))
+t1 <- paste( "colnames(",coluna,")<-c('Doc",i,"')", sep="" )
+eval(parse(text=t1))
+t2<-paste( "cbind(item5,item5.Doc", i, ", row.names=NULL)", sep="" )
+item5<-eval(parse(text=t2))
+t3 <- paste( "rm(", coluna,")",sep="" )
+eval(parse(text=t3))
 }
 
 # 6.0 "insira no arquivo pdf com o resultado da	matriz TF*IDF."
