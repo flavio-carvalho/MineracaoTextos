@@ -46,6 +46,7 @@ colnames(termosdocumentos)=c("doc","termo","freq")
 
 s<-summary (as.factor(termosdocumentos$termo),maxsum=999999)
 termo_df_idf <- as.data.frame(cbind(Termos = names(s),df = s, idf=log10((length(doclist))/s)), stringsAsFactors=F, row.names = 1:length(s))
+item1 <- termo_df_idf
 
 # 2.0 Gera um arquivo pdf com o resultado da matriz DF x Termo
 # Obs.: Acho que se deseja iDF x Termo, não?
