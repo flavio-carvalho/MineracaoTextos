@@ -54,8 +54,8 @@ termo_df_idf <- as.data.frame(cbind(Termos = names(s),df = s, idf=log10((length(
 # 3.0 - Código para produzir a matriz de Term frequency (TF) conforme a fórmula com log
 # Obs.: #Calcula o terceiro item solicitado no trabalho -> Matriz de Term Frequency (TF) (penalizando)
 
-logdf <- as.data.frame(cbind(termosdocumento$doc,termosdocumento$termo,(1+log10(termosdocumento$freq)))
-colnames(logdf)<- c("Doc_number", "Termo", "TF)
+logdf <- as.data.frame(cbind(termosdocumentos$doc,termosdocumentos$termo,(1+log10(termosdocumentos$freq))))
+colnames(logdf)<- c("Doc_number", "Termo", "TF")
 
 
 # 4.0 insira no arquivo pdf com o resultado da matriz TF x Documento.
