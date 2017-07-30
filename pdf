@@ -1,0 +1,5 @@
+sink("C:\\Users\\Raymundo\\Documents\\Franci\\MestradoCEFET\\5 Mineração de Texto\\Trabalho 2\\MatrizComTermoseIDF.rmd")
+knitr:: kable(MatrizTermosIDF)
+sink()
+rmarkdown:: render("MatrizComTermoseIDF.rmd", output_format="pdf_document")
+
