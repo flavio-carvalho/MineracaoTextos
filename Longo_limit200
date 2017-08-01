@@ -1,8 +1,8 @@
 # 0.1 - Descompacta e acessa pasta do arquivo
 wd<- paste((getwd()),"/R",sep="")
 setwd(wd)
-unzip("longo.zip",exdir = "./curto",junkpaths = FALSE)
-wd<- paste((getwd()),"/curto",sep="")
+unzip("longo.zip",exdir = "./longo",junkpaths = FALSE)
+wd<- paste((getwd()),"/longo",sep="")
 setwd(wd)
 
 # 0.2 - Lista dos arquivos descompactados na pasta
