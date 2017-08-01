@@ -26,7 +26,7 @@ obtem_vetor <- function(f,lower=FALSE,min_len=2) {
 # 0.4 -Loop para Calculo de TF (Sem penalizar) e gera arquivo csv
 # Monta a matriz de TF e matriz TF com fórmula do log
 x <- data.frame( Termos=character())
-i3<- data.frame( Termos=character())
+item3<- data.frame( Termos=character())
 for (i in 1:(length(doclist))){
   arquivo <- doclist[i]
   termos <- obtem_vetor(arquivo)
@@ -42,11 +42,11 @@ for (i in 1:(length(doclist))){
   colnames(y)<-c("Termos",paste("Doc",i,sep=""))
   colnames(palavras3)<-c("Termos",paste("Doc",i,sep=""))
   x<-merge(x,y, by=intersect(names(x),names(y)), all=T)
-  i3<-merge(i3,palavras3, by=intersect(names(i3),names(palavras3)), all=T)
+  item3<-merge(item3,palavras3, by=intersect(names(item3),names(palavras3)), all=T)
 }
 
 x<-x[with(x, order(as.character(x$Termos))),]
-i3<-i3[with(i3, order(as.character(i3$Termos))),]
+item3<-item3[with(item3, order(as.character(item3$Termos))),]
 # 0.5 - Leitura do arquivo csv com o resultado da matriz Term frequency (TF) (sem penalizar)
 termosdocumentos = read.csv("curto.csv", stringsAsFactors = F,header = FALSE)
 colnames(termosdocumentos)=c("doc","termo","freq")
@@ -69,7 +69,7 @@ item1<-termo_df_idf
 #logdf<-as.data.frame(cbind(termosdocumentos$doc,termosdocumentos$termo,1+log10(termosdocumentos$freq)),stringAsFactors=F)
 #colnames(logdf)=c("Doc_number","Termo","TF")
 
-#Já está sendo feito em  0.4, ver variável i3
+#Já está sendo feito em  0.4, ver variável item3
 
 # 4.0 insira no arquivo pdf com o resultado da matriz TF x Documento.
 # WIP
@@ -83,7 +83,7 @@ colnames(item5)<-c("Termos")
 for (i in 1:(length(doclist))){
 
 coluna<-paste("item5.Doc",i,sep="")
-valor<-paste( "(as.numeric(as.character(i3$Doc",i,", row.names = NULL)))*(as.numeric(as.character(termo_df_idf$idf,row.names = NULL)))" ,sep="")
+valor<-paste( "(as.numeric(as.character(item3$Doc",i,", row.names = NULL)))*(as.numeric(as.character(termo_df_idf$idf,row.names = NULL)))" ,sep="")
 assign(coluna,eval(parse(text=valor)))
 valor2<-paste("as.data.frame(item5.Doc",i,")",sep="")
 assign(coluna,eval(parse(text=valor2)))
