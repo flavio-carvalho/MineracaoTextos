@@ -1,3 +1,5 @@
+library(gridExtra)
+library(grid)
 # 0.1 - Descompacta e acessa pasta do arquivo
 wd<- paste((getwd()),"/R",sep="")
 setwd(wd)
@@ -51,6 +53,21 @@ item3<-item3[with(item3, order(as.character(item3$Termos))),]
 termosdocumentos = read.csv("curto.csv", stringsAsFactors = F,header = FALSE)
 colnames(termosdocumentos)=c("doc","termo","freq")
 
+#0.6 Teste
+paraPdf=function(arquivocsv,saida){
+  text=read.csv(arquivocsv, stringsAsFactors=FALSE,header = TRUE)
+  maxrow = 30;
+  npages = ceiling(nrow(text)/maxrow)
+  #  grb=textGrob(apply(text, 2, paste, collapse="\n"))
+  pdf(saida, width=8.22,height=11.6)
+  for (i in 1:npages) {
+    idx = seq(1+((i-1)*maxrow), i*maxrow)
+    grid.newpage()
+    grid.table(text[idx, ])
+  }
+  dev.off()
+}
+
 # 1.0 - Solicitado "código para produzir a matriz de document frequency (DF) conforme a fórmula com log"
 # Obs.: Acho que se deseja, na verdade, iDF x Termo, não?
 s<-summary((as.factor(termosdocumentos$termo)),maxsum = 999999)
@@ -61,18 +78,17 @@ item1<-termo_df_idf
 # 2.0 Gera um arquivo pdf com o resultado da matriz DF x Termo
 # Obs.: Acho que se deseja, na verdade, iDF x Termo, não?
 
-# WIP
+write.csv(item1, file ="curto_item2.csv",row.names = FALSE)
+paraPdf("curto_item2.csv","item2.pdf")
+
 
 # 3.0 - Código para produzir a matriz de Term frequency (TF) conforme a fórmula com log
 # Obs.: #Calcula o terceiro item solicitado no trabalho -> Matriz de Term Frequency (TF) (penalizando)
 
-#logdf<-as.data.frame(cbind(termosdocumentos$doc,termosdocumentos$termo,1+log10(termosdocumentos$freq)),stringAsFactors=F)
-#colnames(logdf)=c("Doc_number","Termo","TF")
-
 #Já está sendo feito em  0.4, ver variável item3
 
-# 4.0 insira no arquivo pdf com o resultado da matriz TF x Documento.
-# WIP
+
+
 
 # 5.0 Código para produzir a matriz de TF*IDF
 item5 <- termo_df_idf$Termos
@@ -96,7 +112,14 @@ eval(parse(text=t3))
 }
 
 
+
+# 4.0 insira no arquivo pdf com o resultado da matriz TF x Documento.
+# WIP 
+
+write.csv(item3, file ="curto_item4.csv",row.names = FALSE)
+paraPdf("curto_item4.csv","item4.pdf")
+
 # 6.0 "insira no arquivo pdf com o resultado da	matriz TF*IDF."
 # WIP
-
-
+write.csv(item5, file ="curto_item6.csv",row.names = FALSE)
+paraPdf("curto_item6.csv","item6.pdf")
