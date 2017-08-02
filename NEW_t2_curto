@@ -59,7 +59,7 @@ paraPdf=function(arquivocsv,saida){
   maxrow = 30;
   npages = ceiling(nrow(text)/maxrow)
   #  grb=textGrob(apply(text, 2, paste, collapse="\n"))
-  pdf(saida, width=8.22,height=11.6)
+  pdf(saida, width=8.5,height=11.6)
   for (i in 1:npages) {
     idx = seq(1+((i-1)*maxrow), i*maxrow)
     grid.newpage()
