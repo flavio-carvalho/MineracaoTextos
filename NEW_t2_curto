@@ -112,7 +112,7 @@ eval(parse(text=t3))
 }
 
 
-
+item5[is.na(item5)] <- 0
 # 4.0 insira no arquivo pdf com o resultado da matriz TF x Documento.
 # WIP 
 
