@@ -20,3 +20,14 @@ return(df)
 }
 
 query <-consulta()
+
+########### PARTE EM IMPLEMENTACAO
+# Inicializo uma variavle e defino nome da coluna/doc a ser lido
+similaridade <- 0
+documento <- paste( 'Doc',i, sep="" )
+#####Obtenho o tf do doc em questao
+tfdoc=(as.numeric(as.character(item5[item5$Termos==t1,c(documento)])))
+### Similaridade daquele doc eh o produto do idf com o tf no doc
+similaridade <- similaridade + (i1*tfdoc)
+#### falta guardar esse valor para o doc atual e repetir o processo com os outros
+#### Tendo todos esses valores, listar os 10+ com nome do documento e a similaridade com a query.
