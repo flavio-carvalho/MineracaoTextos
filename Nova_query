@@ -1,0 +1,22 @@
+consulta2<- function() {
+rq<-tolower(readquery())
+
+#Inicializa o dataframe que vai receber os valores de similaridade por documento
+df<- data.frame( Documento=character())
+# Loop que trata dos documentos
+for (j in 1:iteracoes){
+	arquivo <- doclist[j]
+	documento <- paste( 'Doc',j, sep="" )
+	#Inicializa o valor de similaridade
+	sim <- 0
+
+#Calcula a similaridade (da query com documento):
+	for (i in 1:length(rq)){
+		t1 <-rq[i]
+		tfidfodc <-(as.numeric(as.character(item5[item5$Termos==t1,c(documento)])))
+		sim <- sim+tfidfodc
+	} 
+	tempdf <- data.frame(arquivo,sim,stringsAsFactors=FALSE)
+	colnames(tempdf)<-c("Documento","Similaridade")
+	df<-merge(df,tempdf, by=intersect(names(df),names(tempdf)), all=T)
+}
