@@ -31,3 +31,7 @@ tfdoc=(as.numeric(as.character(item5[item5$Termos==t1,c(documento)])))
 similaridade <- similaridade + (i1*tfdoc)
 #### falta guardar esse valor para o doc atual e repetir o processo com os outros
 #### Tendo todos esses valores, listar os 10+ com nome do documento e a similaridade com a query.
+
+
+####HEY!!! Se a conta for SOMATORIO(TF x Idf), então já temos isso
+###### DO ITEM 5! É só selecionar os valores e somar.
