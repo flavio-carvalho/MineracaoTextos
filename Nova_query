@@ -1,7 +1,5 @@
 ## O objetivo desta nova consulta é montar um
 ## data frame com nome do documento | Similaridade
-
-
 consulta2<- function() {
 rq<-tolower(readquery())
 
@@ -27,4 +25,6 @@ for (j in 1:iteracoes){
 return(df)
 }
 
-df2<-consulta2
+final<-consulta2()
+
+#Falta ordenar e reduzir para 10
