@@ -7,9 +7,10 @@ prompt <- "Digite a consulta: "
 }
 
 consulta<- function() {
-rq<-readquery()
+rq<-tolower(readquery())
 
 for (i in 1:length(rq)){
-	print(paste(rq[i],(as.numeric(as.character(item1[item1$Termos==rq[i],c('idf')])))))
+	ccc <- (paste(rq[i],(as.numeric(as.character(item1[item1$Termos==rq[i],c('idf')])))))
+	print(ccc)
 }
 }
