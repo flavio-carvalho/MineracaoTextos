@@ -24,4 +24,7 @@ for (j in 1:iteracoes){
 	colnames(tempdf)<-c("Documento","Similaridade")
 	df<-merge(df,tempdf, by=intersect(names(df),names(tempdf)), all=T)
 }
+return(df)
 }
+
+df2<-consulta2
