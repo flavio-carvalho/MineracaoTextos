@@ -1,3 +1,7 @@
+## O objetivo desta nova consulta é montar um
+## data frame com nome do documento | Similaridade
+
+
 consulta2<- function() {
 rq<-tolower(readquery())
 
@@ -19,4 +23,5 @@ for (j in 1:iteracoes){
 	tempdf <- data.frame(arquivo,sim,stringsAsFactors=FALSE)
 	colnames(tempdf)<-c("Documento","Similaridade")
 	df<-merge(df,tempdf, by=intersect(names(df),names(tempdf)), all=T)
+}
 }
