@@ -8,9 +8,15 @@ prompt <- "Digite a consulta: "
 
 consulta<- function() {
 rq<-tolower(readquery())
-
+df<- data.frame( Termo=character())
 for (i in 1:length(rq)){
-	ccc <- (paste(rq[i],(as.numeric(as.character(item1[item1$Termos==rq[i],c('idf')])))))
-	print(ccc)
+	t1 <-rq[i]
+	i1 <-(as.numeric(as.character(item1[item1$Termos==t1,c('idf')])))
+	tempdf <- data.frame(t1,i1,stringsAsFactors=FALSE)
+	colnames(tempdf)<-c("Termo","idf")
+	df<-merge(df,tempdf, by=intersect(names(df),names(tempdf)), all=T)
 }
+return(df)
 }
+
+
