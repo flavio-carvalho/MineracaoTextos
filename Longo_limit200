@@ -101,7 +101,7 @@ t3 <- paste( "rm(", coluna,")",sep="" )
 eval(parse(text=t3))
 }
 
-
+item5[is.na(item5)] <- 0
 # 6.0 "insira no arquivo pdf com o resultado da	matriz TF*IDF."
 # WIP
 write.csv(item1, file ="longo_item1.csv")
