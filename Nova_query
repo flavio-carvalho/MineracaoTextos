@@ -22,10 +22,10 @@ for (j in 1:iteracoes){
 	colnames(tempdf)<-c("Documento","Similaridade")
 	df<-merge(df,tempdf, by=intersect(names(df),names(tempdf)), all=T)
 }
-df<-df[with(df, order(as.numeric(df$Similaridade))),]
+df<-df[with(df, order(as.numeric(df$Similaridade),decreasing = TRUE)),]
 return(df)
 }
 
 final<-consulta2()
 
-#Falta ordenar e reduzir para 10
+#Falta reduzir para 10
