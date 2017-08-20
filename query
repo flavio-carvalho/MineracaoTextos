@@ -10,6 +10,6 @@ consulta<- function() {
 rq<-readquery()
 
 for (i in 1:length(rq)){
-	print(as.numeric(as.character(item1[item1$Termos==rq[i],c('idf')])))
+	print(paste(rq[i],(as.numeric(as.character(item1[item1$Termos==rq[i],c('idf')])))))
 }
 }
