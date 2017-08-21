@@ -23,9 +23,12 @@ for (j in 1:iteracoes){
 	df<-merge(df,tempdf, by=intersect(names(df),names(tempdf)), all=T)
 }
 df<-df[with(df, order(as.numeric(df$Similaridade),decreasing = TRUE)),]
+#relevantes<-teste[1:10,]
+df<-df[1:10,]
 return(df)
 }
 
 final<-consulta2()
 
-#Falta reduzir para 10
+#Faltava reduzir para 10... não falta mais
+#So falta a bobagem do pdf que ja tem o codigo em algum canto
