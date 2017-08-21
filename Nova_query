@@ -47,4 +47,5 @@ return(df)
 final<-consulta2()
 
 #Faltava reduzir para 10... não falta mais
-#So falta a bobagem do pdf que ja tem o codigo em algum canto
+write.csv(final, file ="resultado_query.csv",row.names = FALSE)
+paraPdf("resultado_query.csv","resultado_query.pdf")
