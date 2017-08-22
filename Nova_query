@@ -31,7 +31,9 @@ for (j in 1:iteracoes){
 		# Se encontrar um valor NA, essa operação dá erro
 		# No data frame item5, foram removidos os valores NA e 
 		# substituidos por zero, mas de qq forma, vale a pena.
-		tfidfodc <-(as.numeric(as.character(item5[item5$Termos==t1,c(documento)])))
+		if (isEmpty(item5[item5$Termos==t1,c(documento)])) {
+ 		   tfidfdoc<-0
+		} else  tfidfodc <-(as.numeric(as.character(item5[item5$Termos==t1,c(documento)])))
 		sim <- sim+tfidfodc
 	} 
 	tempdf <- data.frame(arquivo,sim,stringsAsFactors=FALSE)
