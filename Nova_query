@@ -8,6 +8,10 @@ prompt <- "Digite a consulta: "
   return(n)
 }
 
+  isEmpty <- function(x){
+     return(length(x)==0)
+  }
+
 ## O objetivo desta nova consulta é montar um
 ## data frame com nome do documento | Similaridade
 consulta2<- function() {
