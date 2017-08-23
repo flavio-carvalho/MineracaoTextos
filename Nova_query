@@ -33,7 +33,7 @@ for (j in 1:iteracoes){
 		# substituidos por zero, mas de qq forma, vale a pena.
 		if (isEmpty(item5[item5$Termos==t1,c(documento)])) {
  		   tfidfdoc<-0
-		} else  tfidfodc <-(as.numeric(as.character(item5[item5$Termos==t1,c(documento)])))
+		} else  tfidfdoc <-(as.numeric(as.character(item5[item5$Termos==t1,c(documento)])))
 		sim <- sim+tfidfodc
 	} 
 	tempdf <- data.frame(arquivo,sim,stringsAsFactors=FALSE)
