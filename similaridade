@@ -29,9 +29,9 @@ for (j in 1:iteracoes){
 #Calcula a similaridade (da query com documento):
 	for (i in 1:length(rq)){
 		t1 <-rq[i]
-		if (isEmpty(item1[item1$Termos==t1,c(documento)])) {
+		if (isEmpty(item1[item1$Termos==t1,c('idf')])) {
 		    i1<-0
-		} else  i1 <-(as.numeric(as.character(item1[item1$Termos==t1,c(documento)])))
+		} else  i1 <-(as.numeric(as.character(item1[item1$Termos==t1,c('idf')])))
 		if (isEmpty(item5[item5$Termos==t1,c(documento)])) {
 		    tfidfdoc<-0
 		} else  tfidfdoc <-(as.numeric(as.character(item5[item5$Termos==t1,c(documento)])))
