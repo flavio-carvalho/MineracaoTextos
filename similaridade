@@ -1,0 +1,52 @@
+readquery <- function()
+{ 
+prompt <- "Digite a consulta: "
+  n <- readline(prompt)
+  n <- (unlist(strsplit(n, "\\s+")))
+  return(n)
+}
+
+
+  isEmpty <- function(x){
+     return(length(x)==0)
+  }
+
+## O objetivo desta nova consulta é montar um
+## data frame com nome do documento | Similaridade
+consulta2<- function() {
+rq<-tolower(readquery())
+
+#Inicializa o dataframe que vai receber os valores de similaridade por documento
+df<- data.frame( Documento=character())
+q<- data.frame( Termo=character())
+# Loop que trata dos documentos
+for (j in 1:iteracoes){
+	arquivo <- doclist[j]
+	documento <- paste( 'Doc',j, sep="" )
+	#Inicializa o valor de similaridade
+	sim <- 0
+
+#Calcula a similaridade (da query com documento):
+	for (i in 1:length(rq)){
+		t1 <-rq[i]
+		if (isEmpty(item1[item1$Termos==t1,c(documento)])) {
+		    i1<-0
+		} else  i1 <-(as.numeric(as.character(item1[item1$Termos==t1,c(documento)])))
+		if (isEmpty(item5[item5$Termos==t1,c(documento)])) {
+		    tfidfdoc<-0
+		} else  tfidfdoc <-(as.numeric(as.character(item5[item5$Termos==t1,c(documento)])))
+		sim <- sim+(tfidfdoc*i1)
+	} 
+	tempdf <- data.frame(arquivo,sim,stringsAsFactors=FALSE)
+	colnames(tempdf)<-c("Documento","Similaridade")
+	df<-merge(df,tempdf, by=intersect(names(df),names(tempdf)), all=T)
+}
+df<-df[with(df, order(as.numeric(df$Similaridade),decreasing = TRUE)),]
+#relevantes<-teste[1:10,]
+#df<-df[1:10,]
+return(df)
+}
+
+final<-consulta2()
+write.csv(final, file ="resultado_query.csv",row.names = FALSE)
+paraPdf("resultado_query.csv","resultado_query.pdf")
